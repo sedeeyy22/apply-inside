@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة التقديم | انسايد سيتي</title>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --main-color: #00d2ff; /* لون انسايد سيتي */
+            --bg-dark: #0a0b10;
+            --card-bg: #161b22;
+            --accent-red: #ff2e63;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at 50% 50%, #1a1f35 0%, #0a0b10 100%);
+            color: white;
+            margin: 0; padding: 0;
+        }
+
+        header {
+            padding: 60px 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 3px solid var(--main-color);
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px var(--main-color);
+        }
+
+        .server-brand {
+            font-weight: bold;
+            color: var(--main-color);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 50px 10%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 210, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--main-color); opacity: 0; transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--main-color);
+            box-shadow: 0 15px 40px rgba(0, 210, 255, 0.2);
+        }
+
+        .card:hover::before { opacity: 1; }
+
+        .card h2 { margin-bottom: 20px; font-size: 1.5rem; }
+
+        .btn {
+            background: linear-gradient(45deg, var(--main-color), #3a7bd5);
+            color: white; border: none; padding: 12px 25px;
+            border-radius: 12px; cursor: pointer; font-weight: bold;
+            width: 100%; transition: 0.3s; font-family: 'Cairo';
+        }
+
+        .btn:hover { filter: brightness(1.2); box-shadow: 0 0 15px var(--main-color); }
+
+        /* Modal Styling */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
+            justify-content: center; align-items: center; z-index: 9999;
+        }
+
+        .modal-content {
+            background: #1c2128; padding: 40px; border-radius: 25px;
+            width: 90%; max-width: 600px; border: 1px solid var(--main-color);
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            max-height: 90vh; overflow-y: auto;
+        }
+
+        input, textarea {
+            width: 100%; padding: 15px; margin-top: 8px; margin-bottom: 20px;
+            background: #0d1117; border: 1px solid #30363d; color: white;
+            border-radius: 10px; box-sizing: border-box; font-family: 'Cairo';
+        }
+
+        label { color: var(--main-color); font-weight: bold; font-size: 0.9rem; }
+
+        footer {
+            text-align: center; padding: 40px; color: #666; font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><span class="server-brand">INSIDE</span> CITY</h1>
+        <p>بوابة التوظيف الرسمية للمدينة</p>
+    </header>
+
+    <div class="container">
+        <!-- الأقسام -->
+        <div class="card"><h2>👑 مجلس الوزراء</h2><button class="btn" onclick="openModal('مجلس الوزراء')">تقديم طلب</button></div>
+        <div class="card"><h2>💼 الإدارة</h2><button class="btn" onclick="openModal('الإدارة')">تقديم طلب</button></div>
+        <div class="card"><h2>⚖️ العدل</h2><button class="btn" onclick="openModal('العدل')">تقديم طلب</button></div>
+        <div class="card"><h2>🚑 الصحة</h2><button class="btn" onclick="openModal('الصحة')">تقديم طلب</button></div>
+        <div class="card"><h2>📍 الرقابة</h2><button class="btn" onclick="openModal('الرقابة')">تقديم طلب</button></div>
+        <div class="card"><h2>🕶️ الاستخبارات</h2><button class="btn" onclick="openModal('الاستخبارات')">تقديم طلب</button></div>
+        <div class="card"><h2>🧨 الإجرام</h2><button class="btn" onclick="openModal('الإجرام')">تقديم طلب</button></div>
+        <div class="card"><h2>🚓 الشرطة</h2><button class="btn" onclick="openModal('الشرطة')">تقديم طلب</button></div>
+        <div class="card"><h2>🛡️ الجيش</h2><button class="btn" onclick="openModal('الجيش')">تقديم طلب</button></div>
+    </div>
+
+    <div id="applyModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle" style="color: var(--main-color);">تقديم طلب</h2>
+            <form id="applyForm">
+                <input type="hidden" id="deptName">
+                <div id="dynamicFields"></div>
+                <button type="submit" class="btn" id="submitBtn">إرسال البيانات للديسكورد</button>
+                <button type="button" class="btn" style="background:transparent; color:#888; margin-top:10px;" onclick="closeModal()">إلغاء الأمر</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        جميع الحقوق محفوظة لـ <span class="server-brand">Inside City</span> &copy; 2026
+    </footer>
+
+    <script>
+        const webhookURL = "https://discord.com/api/webhooks/1463549694729912351/ha6svtFX35fTHoXesl0WjzMl4vrN-7s07IPAZ-JUTxdVpxKP_8TDJZTL74UhsGX8yblp";
+
+        function openModal(dept) {
+            const modal = document.getElementById('applyModal');
+            const fields = document.getElementById('dynamicFields');
+            document.getElementById('deptName').value = dept;
+            document.getElementById('modalTitle').innerText = 'نموذج تقديم: ' + dept;
+            
+            let htmlFields = `
+                <label>اسمك الحقيقي:</label><input type="text" id="field1" required>
+                <label>عمرك:</label><input type="number" id="field2" required>
+                <label>يوزرك في الديسكورد:</label><input type="text" id="field3" required>
+                <label>الخبرات السابقة:</label><textarea id="field4" rows="4" required></textarea>
+                <label>لماذا تريد الانضمام لـ ${dept}؟:</label><textarea id="field5" rows="4" required></textarea>
+            `;
+            fields.innerHTML = htmlFields;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() { document.getElementById('applyModal').style.display = 'none'; }
+
+        document.getElementById('applyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const dept = document.getElementById('deptName').value;
+            
+            btn.innerText = "جاري التشفير والإرسال...";
+            btn.disabled = true;
+
+            const data = {
+                username: "Inside City Bot",
+                embeds: [{
+                    title: "📦 طلب تقديم جديد - " + dept,
+                    color: 3447003,
+                    fields: [
+                        { name: "الاسم", value: document.getElementById('field1').value, inline: true },
+                        { name: "العمر", value: document.getElementById('field2').value, inline: true },
+                        { name: "الديسكورد", value: document.getElementById('field3').value },
+                        { name: "الخبرات", value: document.getElementById('field4').value },
+                        { name: "سبب التقديم", value: document.getElementById('field5').value }
+                    ],
+                    footer: { text: "Inside City Whitelist System" }
+                }]
+            };
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(() => {
+                alert('تم إرسال طلبك بنجاح لفرع انسايد سيتي!');
+                closeModal();
+            }).finally(() => {
+                btn.innerText = "إرسال البيانات للديسكورد";
+                btn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
